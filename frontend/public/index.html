@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#0D9488">
+  <meta name="description" content="Aarogya Saathi - Multilingual Voice-First AI Healthcare Accessibility Companion">
+  <title>Aarogya Saathi | आरोग्य साथी</title>
+  
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="brand-icon">AS</div>
+        <div class="brand-info">
+          <h1 id="brand-title">आरोग्य साथी</h1>
+          <span id="brand-subtitle">Aarogya Saathi • Healthcare AI</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- Language Selector -->
+        <select id="lang-selector" class="lang-select" title="Choose Language">
+          <option value="hi-IN" selected>हिन्दी (Hindi)</option>
+          <option value="en-IN">English (India)</option>
+          <option value="mr-IN">मराठी (Marathi)</option>
+          <option value="ta-IN">தமிழ் (Tamil)</option>
+          <option value="te-IN">తెలుగు (Telugu)</option>
+          <option value="bn-IN">বাংলা (Bengali)</option>
+          <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+          <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+          <option value="ml-IN">മലയാളം (Malayalam)</option>
+          <option value="pa-IN">ਪੰਜਾਬੀ (Punjabi)</option>
+          <option value="od-IN">ଓଡ଼ିଆ (Odia)</option>
+        </select>
+
+        <!-- Mode Toggle Button -->
+        <button id="mode-toggle-btn" class="mode-toggle-btn" title="Toggle Simple / Advanced Mode">
+          <span id="mode-icon">⚡</span>
+          <span id="mode-label">Simple Mode</span>
+        </button>
+
+        <!-- Emergency SOS -->
+        <button id="sos-btn" class="sos-btn" title="Emergency Help">
+          🚨 <span id="sos-label">SOS</span>
+        </button>
+
+        <!-- Network Status Indicator -->
+        <div id="network-pill" class="network-indicator" title="Network Status">
+          <span class="status-dot"></span>
+          <span id="network-text">Online</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dynamic Content -->
+    <main class="app-content">
+      
+      <!-- ==========================================
+           MODE A: SIMPLE MODE (ACCESSIBILITY FIRST)
+           ========================================== -->
+      <section id="simple-view" class="simple-container">
+        <!-- Personalized Greeting -->
+        <div class="greeting-card">
+          <div class="greeting-text">
+            <h2 id="simple-greeting">नमस्ते, रमेश जी</h2>
+            <p id="simple-subgreeting">आज आप कैसा महसूस कर रहे हैं?</p>
+          </div>
+          <div style="font-size: 38px;">☀️</div>
+        </div>
+
+        <!-- Hero Voice Assistant Interaction Centerpiece -->
+        <div class="voice-hero-section">
+          <div id="voice-status-pill" class="voice-status-pill">
+            <span class="status-dot"></span>
+            <span id="voice-state-label">सहायक तैयार है • Assistant Ready</span>
+          </div>
+
+          <!-- Pulsing Voice Circle -->
+          <button id="main-mic-btn" class="mic-circle-btn" aria-label="Tap to speak with Aarogya Saathi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v5m-4 0h8"/>
+            </svg>
+          </button>
+
+          <p id="voice-prompt-text" class="voice-prompt-text">टैप करें और बोलें</p>
+          <p id="voice-hint-text" class="voice-hint-text">"मेरी आज की दवाइयाँ बताओ" या "मेरी ब्लड रिपोर्ट समझाओ"</p>
+
+          <!-- Voice Playback Controls -->
+          <div class="voice-controls-bar">
+            <button id="repeat-audio-btn" class="audio-ctrl-btn" title="Repeat spoken answer">
+              🔁 <span id="repeat-audio-label">फिर से सुनें</span>
+            </button>
+            <button id="slow-audio-btn" class="audio-ctrl-btn" title="Speak slower">
+              🐢 <span id="slow-audio-label">धीमी आवाज़ (0.8x)</span>
+            </button>
+            <button id="stop-audio-btn" class="audio-ctrl-btn" style="display: none;" title="Stop audio">
+              ⏹️ <span id="stop-audio-label">रोकें</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Accessible Quick Action Cards -->
+        <div class="simple-cards-grid">
+          <!-- Card 1: Medicines -->
+          <div class="action-card" id="card-simple-meds">
+            <div class="action-card-icon icon-medicine">💊</div>
+            <div class="action-card-info">
+              <h3 id="card-meds-title">मेरी दवाइयाँ (Medicines)</h3>
+              <p id="simple-meds-summary">आज सुबह की 2 दवाइयाँ लीं, रात की 2 बाकी हैं।</p>
+              <span id="card-meds-badge" class="card-action-badge">दवा सूची देखें &gt;</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Reports -->
+          <div class="action-card" id="card-simple-reports">
+            <div class="action-card-icon icon-report">📄</div>
+            <div class="action-card-info">
+              <h3 id="card-reports-title">मेरी रिपोर्ट्स (Reports)</h3>
+              <p id="card-reports-summary">डॉ. अशोक मेहता का पर्चा और 30 Oct की खून जांच।</p>
+              <span id="card-reports-badge" class="card-action-badge">सरल भाषा में समझें &gt;</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Doctor Appointments -->
+          <div class="action-card" id="card-simple-appointment">
+            <div class="action-card-icon icon-doctor">🩺</div>
+            <div class="action-card-info">
+              <h3 id="card-doctor-title">डॉक्टर अपॉइंटमेंट (Doctor)</h3>
+              <p id="card-doctor-summary">18 नवम्बर को डॉ. अशोक मेहता (फोर्टिस अस्पताल)।</p>
+              <span id="card-doctor-badge" class="card-action-badge">पूछने योग्य सवाल &gt;</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Family Caregiver -->
+          <div class="action-card" id="card-simple-family">
+            <div class="action-card-icon icon-family">👨‍👩‍👧</div>
+            <div class="action-card-info">
+              <h3 id="card-family-title">मेरा परिवार (Family)</h3>
+              <p id="card-family-summary">प्रिया शर्मा (बेटी) - आपकी स्वास्थ्य देखभाल में जुड़ी हैं।</p>
+              <span id="card-family-badge" class="card-action-badge">संपर्क करें &gt;</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           MODE B: ADVANCED MODE (DETAILED DASHBOARD)
+           ========================================== -->
+      <section id="advanced-view" class="advanced-container" style="display: none;">
+        <!-- Vitals Overview Header -->
+        <div class="vitals-bar">
+          <div class="vital-card">
+            <div class="vital-title">Fasting Sugar</div>
+            <div class="vital-val">142 <span style="font-size: 0.9rem; font-weight: 500;">mg/dL</span></div>
+            <span class="vital-status high">High (Elevated)</span>
+          </div>
+
+          <div class="vital-card">
+            <div class="vital-title">HbA1c (3-Mo Avg)</div>
+            <div class="vital-val">7.8 <span style="font-size: 0.9rem; font-weight: 500;">%</span></div>
+            <span class="vital-status high">High (&gt;7.0%)</span>
+          </div>
+
+          <div class="vital-card">
+            <div class="vital-title">Blood Pressure</div>
+            <div class="vital-val">132/84 <span style="font-size: 0.9rem; font-weight: 500;">mmHg</span></div>
+            <span class="vital-status normal">Stage 1 Pre-HTN</span>
+          </div>
+
+          <div class="vital-card">
+            <div class="vital-title">Haemoglobin</div>
+            <div class="vital-val">13.8 <span style="font-size: 0.9rem; font-weight: 500;">g/dL</span></div>
+            <span class="vital-status normal">Healthy Normal</span>
+          </div>
+        </div>
+
+        <!-- Advanced Sub-Navigation Tabs -->
+        <nav class="advanced-nav-tabs">
+          <button class="nav-tab-btn active" data-tab="tab-overview"><span id="tab-label-overview">📊 Health Overview</span></button>
+          <button class="nav-tab-btn" data-tab="tab-documents"><span id="tab-label-documents">📁 Medical Documents</span></button>
+          <button class="nav-tab-btn" data-tab="tab-chat"><span id="tab-label-chat">🤖 Document AI Chat</span></button>
+          <button class="nav-tab-btn" data-tab="tab-medicines"><span id="tab-label-medicines">💊 Medicine Manager</span></button>
+          <button class="nav-tab-btn" data-tab="tab-timeline"><span id="tab-label-timeline">📅 Timeline & Visits</span></button>
+          <button class="nav-tab-btn" data-tab="tab-family"><span id="tab-label-family">👥 Family Circle</span></button>
+        </nav>
+
+        <!-- Tab 1: Overview -->
+        <div id="tab-overview" class="tab-pane active">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h3>Today's Adherence & Care Summary</h3>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Patient ID: Ramesh Sharma (68/M)</span>
+          </div>
+
+          <!-- Quick Action Banner -->
+          <div style="background-color: var(--primary-50); border: 1px solid var(--primary-500); border-radius: var(--radius-md); padding: 16px; margin-bottom: 16px;">
+            <h4 style="color: var(--primary-900); margin-bottom: 4px;">💬 Ask Aarogya AI about your health</h4>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
+              Our AI is grounded strictly in your uploaded prescriptions and lab reports using Sarvam AI.
+            </p>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="overview-quick-ask" class="chat-input" placeholder="e.g. What did Dr. Ashok Mehta advise about walking?">
+              <button id="overview-quick-ask-btn" class="btn-primary">Ask</button>
+            </div>
+          </div>
+
+          <!-- Recent Medical Records -->
+          <h4 style="margin-bottom: 10px;">Recent Health Documents</h4>
+          <div id="overview-docs-list" class="document-grid"></div>
+        </div>
+
+        <!-- Tab 2: Medical Documents -->
+        <div id="tab-documents" class="tab-pane">
+          <!-- Upload Area -->
+          <div class="upload-dropzone" id="doc-upload-trigger">
+            <p>📤 Tap here or drag medical records (PDF or Images)</p>
+            <span>Supports Doctor Prescriptions, Blood Tests, Discharge Summaries</span>
+          </div>
+          <input type="file" id="doc-file-input" style="display: none;" accept=".pdf,image/*,.txt">
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h3>Document Intelligence Library</h3>
+            <span id="doc-count-badge" class="card-action-badge">2 Verified Documents</span>
+          </div>
+
+          <div id="advanced-docs-grid" class="document-grid"></div>
+        </div>
+
+        <!-- Tab 3: Document AI Chat -->
+        <div id="tab-chat" class="tab-pane">
+          <div style="margin-bottom: 10px; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-card); padding: 8px 12px; border-radius: var(--radius-sm); border-left: 4px solid var(--primary-600);">
+            🛡️ <strong>Document-Grounded Clinical AI:</strong> All responses reference your uploaded records. The assistant does not invent lab results or prescribe medicines.
+          </div>
+
+          <div class="chat-panel">
+            <div id="chat-messages-container" class="chat-messages">
+              <!-- Rendered messages -->
+            </div>
+            <div class="chat-input-row">
+              <input type="text" id="chat-text-input" class="chat-input" placeholder="Ask a question about your reports, medicines, or appointments...">
+              <button id="chat-mic-btn" class="audio-ctrl-btn" title="Voice Input">🎤</button>
+              <button id="chat-send-btn" class="chat-send-btn">➤</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Medicine Manager -->
+        <div id="tab-medicines" class="tab-pane">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h3>Active Prescription Schedule</h3>
+            <button id="add-med-btn" class="btn-primary">+ Add Medicine</button>
+          </div>
+
+          <div id="advanced-meds-list" class="medicine-list"></div>
+        </div>
+
+        <!-- Tab 5: Timeline & Visits -->
+        <div id="tab-timeline" class="tab-pane">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h3>Chronological Health Timeline</h3>
+            <button id="add-appointment-btn" class="btn-primary">+ Schedule Visit</button>
+          </div>
+
+          <div id="timeline-stream-container" class="timeline-stream"></div>
+        </div>
+
+        <!-- Tab 6: Family Circle -->
+        <div id="tab-family" class="tab-pane">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h3>Family Circle & Caregiver Permissions</h3>
+            <button id="invite-family-btn" class="btn-primary">+ Invite Caregiver</button>
+          </div>
+
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+            Authorized family members can view confirmed medicine schedules and emergency reminders based on patient consent.
+          </p>
+
+          <div id="family-members-list" style="display: flex; flex-direction: column; gap: 12px;"></div>
+
+          <h4 style="margin: 24px 0 10px 0;">Caregiver Access Audit Trail</h4>
+          <div id="family-audit-list" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px;"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Mobile Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-nav="home">
+        <span style="font-size: 20px;">🏠</span>
+        <span id="nav-label-home">Home</span>
+      </button>
+      <button class="nav-item" data-nav="medicines">
+        <span style="font-size: 20px;">💊</span>
+        <span id="nav-label-meds">Medicines</span>
+      </button>
+      <button class="nav-item" data-nav="reports">
+        <span style="font-size: 20px;">📄</span>
+        <span id="nav-label-reports">Reports</span>
+      </button>
+      <button class="nav-item" data-nav="family">
+        <span style="font-size: 20px;">👥</span>
+        <span id="nav-label-family">Family</span>
+      </button>
+    </nav>
+
+    <!-- ==========================================
+         MODALS
+         ========================================== -->
+
+    <!-- Voice Transcript & Explanation Modal -->
+    <div id="voice-response-modal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="modal-response-title">आरोग्य साथी का उत्तर</h3>
+          <button class="modal-close-btn" data-close="voice-response-modal">&times;</button>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <span style="font-size: 0.8rem; color: var(--text-muted);">आपका सवाल:</span>
+          <p id="modal-user-query" style="font-weight: 700; font-size: 1.05rem; margin-top: 2px;"></p>
+        </div>
+        <div style="background-color: var(--primary-50); border: 1px solid var(--primary-100); border-radius: var(--radius-md); padding: 16px; margin-bottom: 16px;">
+          <p id="modal-ai-answer" style="font-size: 1.1rem; line-height: 1.6;"></p>
+        </div>
+        <div id="modal-sources-section" style="margin-bottom: 16px; display: none;">
+          <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Grounding Sources:</span>
+          <div id="modal-sources-list" style="margin-top: 4px;"></div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button id="modal-replay-btn" class="btn-primary" style="flex: 1;">🔁 फिर से सुनें (Replay)</button>
+          <button class="btn-secondary" data-close="voice-response-modal">ठीक है (Close)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Document Explanation Modal -->
+    <div id="doc-detail-modal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="doc-modal-title">Document Intelligence</h3>
+          <button class="modal-close-btn" data-close="doc-detail-modal">&times;</button>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <button id="doc-speak-summary-btn" class="audio-ctrl-btn" style="width: 100%; justify-content: center;">
+            🔊 सरल व्याख्या सुनें (Listen in Native Voice)
+          </button>
+        </div>
+        <div style="background: var(--bg-main); padding: 14px; border-radius: var(--radius-md); margin-bottom: 16px;">
+          <h4 style="margin-bottom: 6px;">सरल सारांश (Simplified Summary):</h4>
+          <p id="doc-modal-summary" style="font-size: 1rem; line-height: 1.5;"></p>
+        </div>
+        <!-- Important Findings -->
+        <div id="doc-modal-findings-section" style="margin-bottom: 16px;">
+          <h4 style="margin-bottom: 8px;">मुख्य जांच परिणाम (Key Findings):</h4>
+          <div id="doc-modal-findings" style="display: flex; flex-direction: column; gap: 6px;"></div>
+        </div>
+        <!-- Questions for Doctor -->
+        <div id="doc-modal-questions-section" style="margin-bottom: 16px;">
+          <h4 style="margin-bottom: 8px;">डॉक्टर से पूछने योग्य सवाल (Questions to Ask Doctor):</h4>
+          <ul id="doc-modal-questions" style="padding-left: 20px; font-size: 0.95rem; line-height: 1.5;"></ul>
+        </div>
+        <button class="btn-secondary" style="width: 100%;" data-close="doc-detail-modal">Close</button>
+      </div>
+    </div>
+
+    <!-- Emergency SOS Modal -->
+    <div id="sos-modal" class="modal-overlay">
+      <div class="modal-card" style="border-top: 6px solid var(--accent-rose);">
+        <div class="modal-header">
+          <h3 style="color: var(--accent-rose);">🚨 आपातकालीन सहायता (Emergency SOS)</h3>
+          <button class="modal-close-btn" data-close="sos-modal">&times;</button>
+        </div>
+        <p style="margin-bottom: 16px; font-size: 1rem;">
+          यदि आपको सीने में तेज़ दर्द, सांस लेने में अत्यधिक कठिनाई, या कोई गंभीर आपातकालीन समस्या है, तो तुरंत संपर्क करें:
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="tel:108" class="btn-primary" style="background-color: var(--accent-rose); font-size: 1.1rem; text-decoration: none; padding: 14px;">
+            🚑 Call Ambulance: 108
+          </a>
+          <a href="tel:112" class="btn-primary" style="background-color: #1E293B; font-size: 1.1rem; text-decoration: none; padding: 14px;">
+            🚨 National Emergency Helpline: 112
+          </a>
+          <a href="tel:+919822012345" class="btn-secondary" style="font-size: 1.05rem; text-decoration: none; padding: 14px;">
+            📞 Call Caregiver: Priya Sharma (बेटी)
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Medicine Modal -->
+    <div id="add-med-modal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Add Prescribed Medicine</h3>
+          <button class="modal-close-btn" data-close="add-med-modal">&times;</button>
+        </div>
+        <form id="add-med-form" style="display: flex; flex-direction: column; gap: 12px;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600;">Medicine Name:</label>
+            <input type="text" id="new-med-name" class="chat-input" required placeholder="e.g. Glycomet-GP 1">
+          </div>
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600;">Dosage:</label>
+            <input type="text" id="new-med-dosage" class="chat-input" required placeholder="e.g. 1 Tablet (500mg)">
+          </div>
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600;">Timing (When to take):</label>
+            <select id="new-med-timing" class="lang-select" style="width: 100%;">
+              <option value="Morning">Morning</option>
+              <option value="Night">Night</option>
+              <option value="Morning & Night">Morning & Night</option>
+              <option value="Afternoon">Afternoon</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600;">Relation to Food:</label>
+            <select id="new-med-meal" class="lang-select" style="width: 100%;">
+              <option value="Before Food">Before Food (खाने से पहले)</option>
+              <option value="After Food">After Food (खाने के बाद)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600;">Instructions / Reason:</label>
+            <input type="text" id="new-med-instructions" class="chat-input" placeholder="e.g. For blood sugar control">
+          </div>
+          <button type="submit" class="btn-primary" style="margin-top: 8px;">Save Medicine</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
